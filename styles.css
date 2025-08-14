@@ -1,0 +1,240 @@
+/* Thiết lập chung cho body */
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background-color: #0d1117;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+/* Container chứa toàn bộ nội dung */
+.container {
+  max-width: 600px;
+  width: 90%;
+  text-align: center;
+  position: relative;
+  z-index: 10;
+}
+
+/* Nền */
+.background-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('images/background-image.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: brightness(0.6);
+  z-index: 1;
+}
+
+/* Avatar */
+.profile-section {
+  margin-bottom: 30px;
+  position: relative;
+}
+
+@keyframes avatar-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+.profile-picture-container {
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  display: inline-block;
+  padding: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  animation: avatar-bounce 3s infinite ease-in-out;
+}
+
+.profile-picture {
+  width: 25vw;
+  height: 25vw;
+  max-width: 120px;
+  max-height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.name {
+  font-size: clamp(1.5rem, 2.5vw, 2em);
+  font-weight: bold;
+  margin-top: 15px;
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.verified-icon {
+  width: 25px;
+  height: 25px;
+  margin-left: 10px;
+  object-fit: contain;
+}
+
+.description {
+  font-size: clamp(1rem, 2vw, 1.1em);
+  color: #bbb;
+  transition: opacity 0.5s ease-in-out;
+  padding: 0 10px;
+  text-align: center;
+  word-break: break-word;
+}
+
+/* Nút mạng xã hội */
+.social-links-section {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.social-link-button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 15px 25px;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 50px;
+  overflow: hidden;
+  z-index: 0;
+  min-width: 200px;
+  background: #111;
+  transition: transform 0.2s;
+  font-weight: bold;
+  justify-content: center;
+  backdrop-filter: blur(4px);
+}
+
+.social-link-button:hover {
+  transform: scale(1.02);
+}
+
+.social-link-button .icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 15px;
+  object-fit: contain;
+}
+
+.social-link-button span {
+  flex-grow: 1;
+  text-align: center;
+}
+
+/* Viền động dạng conic gradient giống hiệu ứng bạn gửi */
+.social-link-button::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 3px;
+  background: conic-gradient(
+    from calc(var(--r2, 0deg) - 80deg) at var(--x, 0px) 50%,
+    #222 0%,
+    #ff0055 10%,
+    #ffcc00 20%,
+    #222 25%
+  );
+  border-radius: 50px;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  animation: rotating2 3s linear infinite, xmove 3s linear infinite;
+  z-index: -1;
+  box-sizing: border-box;
+}
+
+/* Custom property cho hiệu ứng conic */
+@property --r2 {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+@property --x {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
+}
+
+/* Animation giống hệt hiệu ứng bạn gửi (div#b) */
+@keyframes xmove {
+  0% {
+    --x: 20px;
+  }
+  32.82% {
+    --x: 260px;
+  }
+  50% {
+    --x: 260px;
+  }
+  82.82% {
+    --x: 20px;
+  }
+  100% {
+    --x: 20px;
+  }
+}
+
+@keyframes rotating2 {
+  0% {
+    --r2: 0deg;
+  }
+  32.82% {
+    --r2: 0deg;
+  }
+  50% {
+    --r2: 180deg;
+  }
+  82.82% {
+    --r2: 180deg;
+  }
+  100% {
+    --r2: 360deg;
+  }
+}
+
+/* Responsive */
+@media screen and (max-width: 400px) {
+  .social-link-button {
+    padding: 12px 15px;
+  }
+
+  .icon {
+    margin-right: 10px;
+  }
+}
+/* Gradient động luôn đổi màu cho tên MXH */
+.social-link-button span {
+  display: inline-block;
+  background: linear-gradient(270deg, #ff4d4d, #ffcc00, #00e6e6, #ff4dff, #ff4d4d);
+  background-size: 1000% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textGradientShift 6s ease infinite;
+}
+
+@keyframes textGradientShift {
+  0% {
+    background-position: 0% center;
+  }
+  100% {
+    background-position: 100% center;
+  }
+}
